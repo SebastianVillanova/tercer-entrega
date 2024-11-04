@@ -31,9 +31,9 @@ function agregarCard(item){
 
     const liCarrito = document.getElementById("carritoUL");
     const li = document.createElement("li");
-    li.classNameme = "cardCreada"
+
     li.innerHTML = `
-        <li id="card" >
+        <li id="card" class="cardCreada">
             <h3>Producto</h3>
             <p>Guitarra </p>
             <p>Precio por unidad ${localStorage.getItem(item)} </p>
