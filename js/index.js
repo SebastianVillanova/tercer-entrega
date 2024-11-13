@@ -1,6 +1,5 @@
 let carrito = [];
 let precioCarrito = 0;
-const precioTotalCarrito = document.getElementById("precioTotal");
 const PRODUCTOS = [
     {   nombre: "guitarra",
         precio: 1111
@@ -9,9 +8,17 @@ const PRODUCTOS = [
         precio: 2222
     }
 ];
+const precioTotalCarrito = document.getElementById("precioTotal");
+const carritoUL = document.getElementById("carritoUL");
+const liCard = document.getElementById("card");
+const borrarCarritoVacio = document.getElementById("carritoVacio");
+const btnGuitarra = document.getElementById("guitarrahtml");
+const btnBateria = document.getElementById("bateriahtml");
+
 
 localStorage.setItem("guitarra", PRODUCTOS[0].precio);
 localStorage.setItem("bateria", PRODUCTOS[1].precio);
+localStorage.setItem("precio-carrito", precioCarrito);
 
 function agregarAlCarrito(a){
     for (let i = 0; i < localStorage.length; i++){
@@ -23,87 +30,64 @@ function agregarAlCarrito(a){
     }
 }
 
-
-
-
-function agregarCard(item){
+function cardCarrito(item){
     agregarAlCarrito(item);
-
-    const liCarrito = document.getElementById("carritoUL");
     const li = document.createElement("li");
-
+    li.setAttribute("id", "card");
+    li.className = "cardCreada";
     li.innerHTML = `
-        <li id="card" class="cardCreada">
             <h3>Producto</h3>
             <p>Guitarra </p>
             <p>Precio por unidad ${localStorage.getItem(item)} </p>
-            <button id="removerCarrito">X</button>
-        </li>
     `
-    liCarrito.appendChild(li);
-    
+    carritoUL.appendChild(li);
+    li.appendChild(crearBtnBorrar());
     precioTotalCarrito.textContent = `Precio total ${precioCarrito}`;
-    console.log(`Precio total: ${precioCarrito}`);
-
-    const borrarCarritoVacio = document.getElementById("carritoVacio");
-    if(carrito.length < 2){
-        return borrarCarritoVacio.remove();
+    // puede ser que la linea de arriba haya que bajarla despues de crearBtnBorrar 
+    
+    function crearBtnBorrar(){
+        const btnBorrar = document.createElement("button");
+        btnBorrar.textContent = "X";
+        btnBorrar.className = "btn-borrar-de-carrito";
+        btnBorrar.addEventListener("click", ()=>{ 
+            carritoUL.removeChild(li);
+            
+        });
+        return btnBorrar;
     }
+
+    if(carrito.length > 0){
+        return borrarCarritoVacio.remove();
+    } 
+    
+    
 }
 
-
-
-const btnGuitarra = document.getElementById("guitarrahtml");
 btnGuitarra.addEventListener("click", ()=> {
-    agregarCard("guitarra")
-    // agregarAlCarrito("guitarra");
-    
-    // const liCarrito = document.getElementById("carritoUL");
-    // const li = document.createElement("li");
-    // li.innerHTML = `
-    //     <li id="card">
-    //         <h3>Producto</h3>
-    //         <p>Guitarra </p>
-    //         <p>Precio por unidad ${localStorage.getItem("guitarra")} </p>
-    //         <button id="removerCarrito">X</button>
-    //     </li>
-    // `
-    // liCarrito.appendChild(li);
-
-    // precioTotalCarrito.textContent = `Precio total ${precioCarrito}`;
-    // console.log(`Precio total: ${precioCarrito}`);
-
-    // const borrarCarritoVacio = document.getElementById("carritoVacio");
-    // if(carrito.length < 2){
-    //     return borrarCarritoVacio.remove();
-    // }
+    cardCarrito("guitarra");
+    console.log(carrito);
 });
 
-
-
-
-
-const btnBateria = document.getElementById("bateriahtml");
 btnBateria.addEventListener("click", ()=> {
-    agregarCard("bateria");
-    // agregarAlCarrito("bateria");
-
-    // const liCarrito = document.getElementById("carritoUL");
-    // const li = document.createElement("li");
-    // li.innerHTML = `
-    //     <li id="card">
-    //         <h3>Producto</h3>
-    //         <p>Bateria </p>
-    //         <p>Precio por unidad ${localStorage.getItem("bateria")} </p>
-    //         <button id="removerCarrito">X</button>
-    //     </li>
-    // `
-    // liCarrito.appendChild(li);
-    
-    // precioTotalCarrito.textContent = `Precio total ${precioCarrito}`;
-    // console.log(`Precio total: ${precioCarrito}`);
-    // const borrarCarritoVacio = document.getElementById("carritoVacio");
-    // if(carrito.length < 2){
-    //     return borrarCarritoVacio.remove();
-    // }
+    cardCarrito("bateria");
+    console.log(carrito);
 });
+
+
+// revisar por que no se actualiza el precio del carrito cuando agrego o saco items 
+// agregar un if para que aparezca carrito vacio si carrito.length == 0 despues de borrar todos los items 
+
+
+
+
+/* 
+Bueno, venís muy bien encaminado con tu aplicación.
+Hay cosas que funcionan bien, otras que no y otras que faltan, vamos por parte.
+Lo de acumular productos en el carrito funciona sin problemas; lo de eliminarlos, no.
+Después, el storage prácticamente no lo estamos utilizando, ya que no tiene ninguna función relevante dentro de la aplicación, si tenemos un carrito, 
+la idea sería justamente que en el storage se vaya actualizando ese carrito.
+Después, también habría que tener en cuenta cuál es la tarea principal de tu aplicación, la venta de productos, entonces deberíamos poder completarla. 
+Es decir, que una vez que el usuario seleccione los productos que quiere comprar, que pueda confirmar la compra, que se le de el ok de que salió todo bien 
+y que luego de eso se vacíe el carrito volviendo al punto cero. En fin, la preentrega queda aprobada, pero a no dormirse que son puntos importantes para 
+encarar la entrega final. Felicitaciones por el proyecto, la cursada y lo mejor para lo que sigue!
+*/
