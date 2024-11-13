@@ -29,7 +29,15 @@ function agregarAlCarrito(a){
         }
     }
 }
-
+function refreshCarrito(){
+    if(carrito.length === 0){
+        li.innerHTML=`
+        <li id="carritoVacio">carrito vacio</li>
+        `;
+        carritoUL.appendChild(li);
+    }
+    precioTotalCarrito.textContent = `Precio total ${precioCarrito}`;
+}
 function cardCarrito(item){
     agregarAlCarrito(item);
     const li = document.createElement("li");
@@ -42,26 +50,42 @@ function cardCarrito(item){
     `
     carritoUL.appendChild(li);
     li.appendChild(crearBtnBorrar());
-    precioTotalCarrito.textContent = `Precio total ${precioCarrito}`;
+    refreshCarrito();
+    // precioTotalCarrito.textContent = `Precio total ${precioCarrito}`;
     // puede ser que la linea de arriba haya que bajarla despues de crearBtnBorrar 
-    
+
+
     function crearBtnBorrar(){
         const btnBorrar = document.createElement("button");
         btnBorrar.textContent = "X";
         btnBorrar.className = "btn-borrar-de-carrito";
         btnBorrar.addEventListener("click", ()=>{ 
             carritoUL.removeChild(li);
-            
+            carrito.filter(key);
+            // buscar como remover el key
+
+            precioCarrito -= parseInt(localStorage.getItem(key));
+            /* 
+            PROBAR
+            var arreglo = [1,2,3,4,5];
+
+            var indice = arreglo.indexOf(3); // obtenemos el indice
+            arreglo.splice(indice, 1); // 1 es la cantidad de elemento a eliminar
+
+            console.log( arreglo );
+            */
+            console.log(carrito);
         });
+        
         return btnBorrar;
     }
 
     if(carrito.length > 0){
         return borrarCarritoVacio.remove();
     } 
-    
-    
 }
+
+
 
 btnGuitarra.addEventListener("click", ()=> {
     cardCarrito("guitarra");
