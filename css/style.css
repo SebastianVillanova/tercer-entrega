@@ -10,9 +10,16 @@ body{
     border: 1px solid black;
     width: 300px;
 }
+
 ul{
     list-style: none;
 }
+
+#carritoVacio{
+    
+}
+
+
 
 h3{
     margin: 0;
