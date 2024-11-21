@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,28 +7,31 @@
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-    <header>
+    <div class="nav-container">
+        <nav class="navbar">
+            <h1 class="navbar-logo">Tienda</h1>
+            <h1 class="ver-carrito" id="verCarrito">🛒<span id="cantCarrito" class="cantidad-carrito"></span></h1>
+        </nav>
+    </div>
 
-    </header>
-    <main>
-        <div class="divBotones">
-            
-            <button id="guitarrahtml">guitarra</button>
-            <button id="bateriahtml">bateria</button>
+    <div class="banner">
+        <div class="banner-container">
+            <h1>Tienda</h1>
+            <p>Tienda virtual</p>
         </div>
-        <div id="carrito">
-            <h3>Carrito</h3>
-            <ul id="carritoUL">
-                <li id="carritoVacio">Carrito vacio</li>
-            </ul>
-            <div id="precioTotal"></div>
-        </div>
+    </div>
+    
+
+    <div id="shopContent" class="shop-content">
+        
+    </div>
+
+    <div id="carrito-container" class="carrito-container">
+
+    </div>
 
 
-    </main>
-    <footer>
-
-    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="./js/index.js"></script>
-</body>
+    </body>
 </html>
